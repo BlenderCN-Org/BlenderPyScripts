@@ -19,8 +19,11 @@ class ObjectCursorArray(bpy.types.Operator):
 
     def execute(self, context):
         scene = context.scene
-        cursor = scene.cursor_location
+        #cursor = scene.cursor_location
+       
         obj = scene.objects.active
+        
+        cursor = obj.location + context.window_manager.Space
 
         for i in range(self.total):
             obj_new = obj.copy()
@@ -50,13 +53,16 @@ class HelloWorldPanel(bpy.types.Panel):
         row = layout.row()
         row.prop(scn, "num")
         
+        '''
         row=layout.row()
         row.prop(scn, "SpaceX")
-        #row=layout.row()
         row.prop(scn, "SpaceY")
-        #row=layout.row()
         row.prop(scn, "SpaceZ")
-
+        '''
+        
+        row=layout.row()
+        row.prop(scn, "Space")
+        
         row = layout.row()
         row.operator("object.cursor_array")
 
@@ -95,9 +101,12 @@ if __name__ == "__main__":
     min = 1,
     )
     
+    '''
     bpy.types.WindowManager.SpaceX = bpy.props.IntProperty(name="X Space", description = "Enter X Spacing")
     bpy.types.WindowManager.SpaceY = bpy.props.IntProperty(name="Y Space", description = "Enter Y Spacing")
     bpy.types.WindowManager.SpaceZ = bpy.props.IntProperty(name="Z Space", description = "Enter Z Spacing")
+    '''
     
+    bpy.types.WindowManager.Space = bpy.props.FloatVectorProperty(name="Spacing")
 
     register()
