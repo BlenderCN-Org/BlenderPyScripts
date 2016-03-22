@@ -15,7 +15,7 @@ class ObjectCursorArray(bpy.types.Operator):
     
     scn = context.window_manager
     #total = bpy.props.IntProperty(name="Steps", default=2, min=1, max=100)
-    total = bpy.types.WindowManager.num
+    total = bpy.context.window_manager.num
 
     def execute(self, context):
         scene = context.scene
