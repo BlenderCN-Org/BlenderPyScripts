@@ -4,15 +4,18 @@ bl_info = {
 }
 
 import bpy
+from bpy import *
 
 
 class ObjectCursorArray(bpy.types.Operator):
     """Object Cursor Array"""
     bl_idname = "object.cursor_array"
-    bl_label = "ADD Cursor Array"
+    bl_label = "Cursor Array"
     bl_options = {'REGISTER', 'UNDO'}
-
-    total = bpy.props.IntProperty(name="Steps", default=2, min=1, max=100)
+    
+    scn = context.window_manager
+    #total = bpy.props.IntProperty(name="Steps", default=2, min=1, max=100)
+    total = bpy.types.WindowManager.num
 
     def execute(self, context):
         scene = context.scene
@@ -38,9 +41,14 @@ class HelloWorldPanel(bpy.types.Panel):
     bl_context = "object"
 
     def draw(self, context):
+        scn = context.window_manager
+        
         layout = self.layout
 
         obj = context.object
+        
+        row = layout.row()
+        row.prop(scn, "num")
 
         row = layout.row()
         row.operator("object.cursor_array")
@@ -57,6 +65,10 @@ def register():
     bpy.utils.register_class(ObjectCursorArray)
     bpy.utils.register_class(HelloWorldPanel)
     bpy.types.VIEW3D_MT_object.append(menu_func)
+    
+    
+        
+        
 
    
 
@@ -68,4 +80,12 @@ def unregister():
     bpy.utils.unregister_class(HelloWorldPanel)
 
 if __name__ == "__main__":
+    #Some Integer property
+    bpy.types.WindowManager.num = bpy.props.IntProperty(
+    name="I Am An Input Button",
+    description = "Enter Some Value here you'd like to be stored",
+    default = 512, 
+    min = 1,
+    )
+
     register()
