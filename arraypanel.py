@@ -49,6 +49,13 @@ class HelloWorldPanel(bpy.types.Panel):
         
         row = layout.row()
         row.prop(scn, "num")
+        
+        row=layout.row()
+        row.prop(scn, "SpaceX")
+        #row=layout.row()
+        row.prop(scn, "SpaceY")
+        #row=layout.row()
+        row.prop(scn, "SpaceZ")
 
         row = layout.row()
         row.operator("object.cursor_array")
@@ -87,5 +94,10 @@ if __name__ == "__main__":
     default = 512, 
     min = 1,
     )
+    
+    bpy.types.WindowManager.SpaceX = bpy.props.IntProperty(name="X Space", description = "Enter X Spacing")
+    bpy.types.WindowManager.SpaceY = bpy.props.IntProperty(name="Y Space", description = "Enter Y Spacing")
+    bpy.types.WindowManager.SpaceZ = bpy.props.IntProperty(name="Z Space", description = "Enter Z Spacing")
+    
 
     register()
