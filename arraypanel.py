@@ -10,22 +10,18 @@ from bpy import *
 class ObjectCursorArray(bpy.types.Operator):
     """Object Cursor Array"""
     bl_idname = "object.cursor_array"
-    bl_label = "Cursor Array"
+    bl_label = "Linear Array"
     bl_options = {'REGISTER', 'UNDO'}
     
     scn = context.window_manager
     #total = bpy.props.IntProperty(name="Steps", default=2, min=1, max=100)
     total = bpy.context.window_manager.num
-
+Ā
     def execute(self, context):
         scene = context.scene
         cursor = scene.cursor_location
        
         obj = scene.objects.active
-        
-        #cursor = obj.location + context.window_manager.Space
-        #cursor = obj.location
-        #cursor.y += 10
 
         for i in range(self.total):
             obj_new = obj.copy()
@@ -58,13 +54,7 @@ class HelloWorldPanel(bpy.types.Panel):
         
         row = layout.row()
         row.prop(scn, "num")
-        
-        '''
-        row=layout.row()
-        row.prop(scn, "SpaceX")
-        row.prop(scn, "SpaceY")
-        row.prop(scn, "SpaceZ")
-        '''
+ 
         
         row=layout.row()
         row.prop(scn, "Space")
@@ -78,18 +68,11 @@ def menu_func(self, context):
     self.layout.operator(ObjectCursorArray.bl_idname)
 
 
-
-
 def register():
     bpy.utils.register_class(ObjectCursorArray)
     bpy.utils.register_class(HelloWorldPanel)
     bpy.types.VIEW3D_MT_object.append(menu_func)
-    
-    
-        
-        
 
-   
 
 def unregister():
   
@@ -99,20 +82,13 @@ def unregister():
     bpy.utils.unregister_class(HelloWorldPanel)
 
 if __name__ == "__main__":
-    #Some Integer property
     bpy.types.WindowManager.num = bpy.props.IntProperty(
     name="Number of instances:",
-    description = "Enter Some Value here you'd like to be stored",
-    default = 512, 
+    description = "Number of Cloner Objects to be created",
+    default = 3, 
     min = 1,
     )
-    
-    '''
-    bpy.types.WindowManager.SpaceX = bpy.props.IntProperty(name="X Space", description = "Enter X Spacing")
-    bpy.types.WindowManager.SpaceY = bpy.props.IntProperty(name="Y Space", description = "Enter Y Spacing")
-    bpy.types.WindowManager.SpaceZ = bpy.props.IntProperty(name="Z Space", description = "Enter Z Spacing")
-    '''
-    
+   
     bpy.types.WindowManager.Space = bpy.props.FloatVectorProperty(name="Spacing")
 
     register()
