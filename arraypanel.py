@@ -19,11 +19,13 @@ class ObjectCursorArray(bpy.types.Operator):
 
     def execute(self, context):
         scene = context.scene
-        #cursor = scene.cursor_location
+        cursor = scene.cursor_location
        
         obj = scene.objects.active
         
-        cursor = obj.location + context.window_manager.Space
+        #cursor = obj.location + context.window_manager.Space
+        #cursor = obj.location
+        #cursor.y += 10
 
         for i in range(self.total):
             obj_new = obj.copy()
@@ -37,7 +39,7 @@ class ObjectCursorArray(bpy.types.Operator):
     
 class HelloWorldPanel(bpy.types.Panel):
     """Creates a Panel in the Object properties window"""
-    bl_label = "Hello World Panel"
+    bl_label = "MoGraph: Cloner"
     bl_idname = "OBJECT_PT_hello"
     bl_space_type = 'PROPERTIES'
     bl_region_type = 'WINDOW'
@@ -95,7 +97,7 @@ def unregister():
 if __name__ == "__main__":
     #Some Integer property
     bpy.types.WindowManager.num = bpy.props.IntProperty(
-    name="I Am An Input Button",
+    name="Number of instances:",
     description = "Enter Some Value here you'd like to be stored",
     default = 512, 
     min = 1,
