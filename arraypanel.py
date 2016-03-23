@@ -14,9 +14,11 @@ class ObjectCursorArray(bpy.types.Operator):
     bl_options = {'REGISTER', 'UNDO'}
     
     scn = context.window_manager
+    
+    ''' IDK WHY BUT THIS WORKS ONLY IF YOU UNCOMMENT THE # below and comment the code of total below that, run it like that. And then undo the steps and run.   '''
     #total = bpy.props.IntProperty(name="Steps", default=2, min=1, max=100)
     total = bpy.context.window_manager.num
-Ā
+
     def execute(self, context):
         scene = context.scene
         cursor = scene.cursor_location
@@ -38,8 +40,7 @@ class ObjectCursorArray(bpy.types.Operator):
     
     
 class HelloWorldPanel(bpy.types.Panel):
-    """Creates a Panel in the Object properties window"""
-    bl_label = "MoGraph: Cloner"
+    bl_label = "MoGraph: LinearArray Cloner"
     bl_idname = "OBJECT_PT_hello"
     bl_space_type = 'PROPERTIES'
     bl_region_type = 'WINDOW'
@@ -82,12 +83,7 @@ def unregister():
     bpy.utils.unregister_class(HelloWorldPanel)
 
 if __name__ == "__main__":
-    bpy.types.WindowManager.num = bpy.props.IntProperty(
-    name="Number of instances:",
-    description = "Number of Cloner Objects to be created",
-    default = 3, 
-    min = 1,
-    )
+    bpy.types.WindowManager.num = bpy.props.IntProperty(name="Number of instances:", description = "Number of Cloner Objects to be created", default = 3, min = 1)
    
     bpy.types.WindowManager.Space = bpy.props.FloatVectorProperty(name="Spacing")
 
