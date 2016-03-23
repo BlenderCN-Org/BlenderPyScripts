@@ -26,15 +26,17 @@ class ObjectCursorArray(bpy.types.Operator):
         obj = scene.objects.active
 
         for i in range(self.total):
-            obj_new = obj.copy()
-            scene.objects.link(obj_new)
-
-            factor = i / self.total
-            #obj_new.location = (obj.location * factor) + (cursor * (1.0 - factor))
-            obj_new.location = obj.location 
-            obj_new.location.x += context.window_manager.Space*factor
-            obj_new.location.y += context.window_manager.Space*factor
-            obj_new.location.z += context.window_manager.Space*factor
+            factor_x = i / self.total
+          
+            for j in range(self.total):
+                factor_y=j/self.total
+                obj_new = obj.copy()
+                scene.objects.link(obj_new)
+                #obj_new.location = (obj.location * factor) + (cursor * (1.0 - factor))
+                obj_new.location = obj.location 
+                obj_new.location.x += context.window_manager.Space*factor_x
+                obj_new.location.y += context.window_manager.Space*factor_y
+                #obj_new.location.z += context.window_manager.Space*factor
 
         return {'FINISHED'}
     
