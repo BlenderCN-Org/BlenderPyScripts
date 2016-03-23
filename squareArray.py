@@ -10,7 +10,7 @@ from bpy import *
 class ObjectCursorArray(bpy.types.Operator):
     """Object Cursor Array"""
     bl_idname = "object.cursor_array"
-    bl_label = "CUBE Array"
+    bl_label = "2D Array"
     bl_options = {'REGISTER', 'UNDO'}
     
     scn = context.window_manager
@@ -30,6 +30,8 @@ class ObjectCursorArray(bpy.types.Operator):
           
             for j in range(self.total):
                 factor_y=j/self.total
+                
+                
                 obj_new = obj.copy()
                 scene.objects.link(obj_new)
                 #obj_new.location = (obj.location * factor) + (cursor * (1.0 - factor))
@@ -42,7 +44,7 @@ class ObjectCursorArray(bpy.types.Operator):
     
     
 class HelloWorldPanel(bpy.types.Panel):
-    bl_label = "MoGraph: 3DCUBE Array Cloner"
+    bl_label = "MoGraph: 2DSQUARE Array Cloner"
     bl_idname = "OBJECT_PT_hello"
     bl_space_type = 'PROPERTIES'
     bl_region_type = 'WINDOW'
