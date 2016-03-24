@@ -63,7 +63,7 @@ class ArrayPanel(bpy.types.Panel):
         row.operator("object.mograph_array")
 
 def menu_func(self, context):
-    self.layout.operator(ObjectCursorArray.bl_idname)
+    self.layout.operator(VarArray.bl_idname)
 
 def register():
     bpy.utils.register_class(VarArray)
