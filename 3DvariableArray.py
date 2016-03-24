@@ -17,7 +17,7 @@ class ObjectCursorArray(bpy.types.Operator):
     
     ''' IDK WHY BUT THIS WORKS ONLY IF YOU UNCOMMENT THE # below and comment the code of total below that, run it like that. And then undo the steps and run.   '''
     #total = bpy.props.IntVectorProperty(name="Steps")
-    total = bpy.context.window_manager.num
+    #total = bpy.context.window_manager.num
     #total_x = total[0]
     #total_y = total[1]
     #total_z = total[2]
@@ -28,22 +28,22 @@ class ObjectCursorArray(bpy.types.Operator):
        
         obj = scene.objects.active
 
-        for i in range(self.total[0]):
-            factor_x = i / self.total[0]
+        for i in range(bpy.context.window_manager.num[0]):
+            factor_x = i / bpy.context.window_manager.num[0]
           
-            for j in range(self.total[1]):
-                factor_y=j/self.total[1]
+            for j in range(bpy.context.window_manager.num[1]):
+                factor_y=j/bpy.context.window_manager.num[1]
                 
-                for k in range(self.total[2]):
-                    factor_z=k/self.total[2]
+                for k in range(bpy.context.window_manager.num[2]):
+                    factor_z=k/bpy.context.window_manager.num[2]
                     
                     obj_new = obj.copy()
                     scene.objects.link(obj_new)
                     #obj_new.location = (obj.location * factor) + (cursor * (1.0 - factor))
                     obj_new.location = obj.location 
-                    obj_new.location.x += context.window_manager.Space*factor_x
-                    obj_new.location.y += context.window_manager.Space*factor_y
-                    obj_new.location.z += context.window_manager.Space*factor_z
+                    obj_new.location.x += context.window_manager.Space[0]*factor_x
+                    obj_new.location.y += context.window_manager.Space[1]*factor_y
+                    obj_new.location.z += context.window_manager.Space[2]*factor_z
 
         return {'FINISHED'}
     
@@ -94,6 +94,6 @@ def unregister():
 if __name__ == "__main__":
     bpy.types.WindowManager.num = bpy.props.IntVectorProperty(name="EDGE:", description = "Number of Cloner Objects to be created on an edge")
    
-    bpy.types.WindowManager.Space = bpy.props.IntProperty(name="Spacing")
+    bpy.types.WindowManager.Space = bpy.props.FloatVectorProperty(name="Spacing")
 
     register()
