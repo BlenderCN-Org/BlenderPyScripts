@@ -18,9 +18,9 @@ class ObjectCursorArray(bpy.types.Operator):
     ''' IDK WHY BUT THIS WORKS ONLY IF YOU UNCOMMENT THE # below and comment the code of total below that, run it like that. And then undo the steps and run.   '''
     #total = bpy.props.IntVectorProperty(name="Steps")
     total = bpy.context.window_manager.num
-    total_x = total[0]
-    total_y = total[1]
-    total_z = total[2]
+    #total_x = total[0]
+    #total_y = total[1]
+    #total_z = total[2]
 
     def execute(self, context):
         scene = context.scene
@@ -28,14 +28,14 @@ class ObjectCursorArray(bpy.types.Operator):
        
         obj = scene.objects.active
 
-        for i in range(self.total_x):
-            factor_x = i / self.total_x
+        for i in range(self.total[0]):
+            factor_x = i / self.total[0]
           
-            for j in range(self.total_y):
-                factor_y=j/self.total_y
+            for j in range(self.total[1]):
+                factor_y=j/self.total[1]
                 
-                for k in range(self.total_z):
-                    factor_z=k/self.total_z
+                for k in range(self.total[2]):
+                    factor_z=k/self.total[2]
                     
                     obj_new = obj.copy()
                     scene.objects.link(obj_new)
