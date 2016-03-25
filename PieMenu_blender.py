@@ -7,15 +7,15 @@ class VIEW3D_PIE_SV_ops(bpy.types.Operator):
     bl_label = "Operator Label"
 
     mode_options = [
-        ("option1", "option1", "", "CURVE_DATA", 0),
-        ("option2", "option2", "", "", 1),
-        ("option3", "option3", "", "", 2)
+        ("button1", "button1", "", "CURVE_DATA", 0),
+        ("button2", "button2", "", "", 1),
+        ("button3", "button3", "", "", 2)
     ]
 
     selected_mode = bpy.props.EnumProperty(
         items=mode_options,
         description="main",
-        default="option1"
+        default="button1"
     )
 
     def execute(self, context):
