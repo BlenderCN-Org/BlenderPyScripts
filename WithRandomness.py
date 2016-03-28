@@ -5,6 +5,7 @@ bl_info = {
 
 import bpy
 from bpy import *
+import random
 
 class VarArray(bpy.types.Operator):
     bl_idname = "object.mograph_array"
@@ -37,8 +38,7 @@ class VarArray(bpy.types.Operator):
                     obj_new.location.z += context.window_manager.Space[2]*factor_z
                     
                     if (context.window_manager.RandomScale == True):
-                        obj_new.scale = random.random() * context.window_manager.RandomScaleVal
-
+                        obj_new.scale.magnitude = obj.scale.magnitude * random.random() * context.window_manager.RandomScaleVal
         return {'FINISHED'}
     
     
