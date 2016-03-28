@@ -29,12 +29,15 @@ class VarArray(bpy.types.Operator):
                     factor_z=k/bpy.context.window_manager.num[2]
                     
                     obj_new = obj.copy()
-                    scene.objects.link(obj_new)
+                    scene.objects.link(obj_new)                
                     
                     obj_new.location = obj.location 
                     obj_new.location.x += context.window_manager.Space[0]*factor_x
                     obj_new.location.y += context.window_manager.Space[1]*factor_y
                     obj_new.location.z += context.window_manager.Space[2]*factor_z
+                    
+                    if (context.window_manager.RandomScale == True):
+                        obj_new.scale = random.random() * context.window_manager.RandomScaleVal
 
         return {'FINISHED'}
     
