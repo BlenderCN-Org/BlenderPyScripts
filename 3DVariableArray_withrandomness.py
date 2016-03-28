@@ -60,10 +60,13 @@ class ArrayPanel(bpy.types.Panel):
         row.prop(scn, "Space")
         
         row = layout.row()
-        row.operator("object.mograph_array")
+        row.prop(scn, "RandomRot")
+        row.prop(scn, "RandomScale")
         
         row = layout.row()
-        row.prop(scn, "Random")
+        row.operator("object.mograph_array")
+        
+        
 
 def menu_func(self, context):
     self.layout.operator(VarArray.bl_idname)
@@ -81,6 +84,7 @@ def unregister():
 if __name__ == "__main__":
     bpy.types.WindowManager.num = bpy.props.IntVectorProperty(name="EDGE:", description = "Number of Cloner Objects to be created on an edge", default = (1,1,1))
     bpy.types.WindowManager.Space = bpy.props.FloatVectorProperty(name="Spacing")
-    bpy.types.WindowManager.Random = bpy.props.BoolProperty(name="Randomness", default=False)
+    bpy.types.WindowManager.RandomScale = bpy.props.BoolProperty(name="Random Scale", default=False)
+    bpy.types.WindowManager.RandomRot = bpy.props.BoolProperty(name="Random Rotation", default=False)
 
     register()
