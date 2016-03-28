@@ -41,7 +41,13 @@ class VarArray(bpy.types.Operator):
                         obj_new.scale.magnitude = obj.scale.magnitude * random.random() * context.window_manager.RandomScaleVal
                                                
                     if (context.window_manager.RandomRot == True):
-                        obj_new.scale.magnitude = obj.scale.magnitude * random.random() * context.window_manager.RandomScaleVal    
+                        if(context.window_manager.RandomRotX == True):
+                            obj_new.rotation_euler.x = random.random() * context.window_manager.RandomRotVal
+                        if(context.window_manager.RandomRotY == True):
+                            obj_new.rotation_euler.y = random.random() * context.window_manager.RandomRotVal
+                        if(context.window_manager.RandomRotZ == True):
+                            obj_new.rotation_euler.z = random.random() * context.window_manager.RandomRotVal
+                            
         
         return {'FINISHED'}
     
