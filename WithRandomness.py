@@ -39,6 +39,10 @@ class VarArray(bpy.types.Operator):
                     
                     if (context.window_manager.RandomScale == True):
                         obj_new.scale.magnitude = obj.scale.magnitude * random.random() * context.window_manager.RandomScaleVal
+                                               
+                    if (context.window_manager.RandomRot == True):
+                        obj_new.scale.magnitude = obj.scale.magnitude * random.random() * context.window_manager.RandomScaleVal    
+        
         return {'FINISHED'}
     
     
@@ -67,6 +71,11 @@ class ArrayPanel(bpy.types.Panel):
         
         if(scn.RandomRot == True):
             row.prop(scn, "RandomRotVal")
+            
+            row=layout.row()
+            row.prop(scn, "RandomRotX")
+            row.prop(scn, "RandomRotY")
+            row.prop(scn, "RandomRotZ")
             
         
         row = layout.row()
@@ -102,4 +111,9 @@ if __name__ == "__main__":
     bpy.types.WindowManager.RandomRot = bpy.props.BoolProperty(name="Random Rotation", default=False)
     bpy.types.WindowManager.RandomScaleVal = bpy.props.FloatProperty(name="RandomScale", default=0.0)
     bpy.types.WindowManager.RandomRotVal = bpy.props.FloatProperty(name="RandomRotation", default=0.0)
+    
+    bpy.types.WindowManager.RandomRotX = bpy.props.BoolProperty(name="X", default=False)
+    bpy.types.WindowManager.RandomRotY = bpy.props.BoolProperty(name="Y", default=False)
+    bpy.types.WindowManager.RandomRotZ = bpy.props.BoolProperty(name="Z", default=False)
+    
     register()
