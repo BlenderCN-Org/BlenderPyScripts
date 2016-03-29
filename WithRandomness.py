@@ -38,7 +38,7 @@ class VarArray(bpy.types.Operator):
                     obj_new.location.z += context.window_manager.Space[2]*factor_z
                     
                     if (context.window_manager.RandomScale == True):
-                        obj_new.scale.magnitude = obj.scale.magnitude * random.random() * context.window_manager.RandomScaleVal
+                        obj_new.scale.magnitude = (obj.scale.magnitude * 0.5) +(obj.scale.magnitude * random.random() * context.window_manager.RandomScaleVal)
                                                
                     if (context.window_manager.RandomRot == True):
                         if(context.window_manager.RandomRotX == True):
