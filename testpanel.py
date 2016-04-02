@@ -1,5 +1,7 @@
-import bpy
+# ADDS A PANEL IN TOOLS MENU. 
 
+
+import bpy
 
 class TestPanel(bpy.types.Panel):
     bl_label = "TestPanel"
